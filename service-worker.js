@@ -14,7 +14,7 @@
 importScripts("https://storage.googleapis.com/workbox-cdn/releases/4.3.1/workbox-sw.js");
 
 importScripts(
-  "/nepottysm-app/precache-manifest.7ad738a52359a2f5709efa0872d8b95d.js"
+  "/nepottysm-app/precache-manifest.f8633ef6f212a0b11a8595dc2f32d01c.js"
 );
 
 self.addEventListener('message', (event) => {
