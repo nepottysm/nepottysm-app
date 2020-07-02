@@ -222,7 +222,9 @@ class LandingPage extends React.Component {
                 </p>
               )}
               {nepoScore < 75 && nepoScore >= 50 && (
-                <p>Check critic reviews before going for movies</p>
+                <p>
+                  You should check critic&apos;s reviews before going for movies
+                </p>
               )}
               {nepoScore < 50 && (
                 <p>
