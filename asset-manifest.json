@@ -1,23 +1,23 @@
 {
   "files": {
-    "main.css": "/nepottysm-app/static/css/main.ecb8a10e.chunk.css",
-    "main.js": "/nepottysm-app/static/js/main.98ae4594.chunk.js",
-    "main.js.map": "/nepottysm-app/static/js/main.98ae4594.chunk.js.map",
+    "main.css": "/nepottysm-app/static/css/main.32e5179f.chunk.css",
+    "main.js": "/nepottysm-app/static/js/main.f8dd1c84.chunk.js",
+    "main.js.map": "/nepottysm-app/static/js/main.f8dd1c84.chunk.js.map",
     "runtime-main.js": "/nepottysm-app/static/js/runtime-main.a7274046.js",
     "runtime-main.js.map": "/nepottysm-app/static/js/runtime-main.a7274046.js.map",
     "static/js/2.9112ffe7.chunk.js": "/nepottysm-app/static/js/2.9112ffe7.chunk.js",
     "static/js/2.9112ffe7.chunk.js.map": "/nepottysm-app/static/js/2.9112ffe7.chunk.js.map",
     "index.html": "/nepottysm-app/index.html",
-    "precache-manifest.166994492c8634377ad331160643a797.js": "/nepottysm-app/precache-manifest.166994492c8634377ad331160643a797.js",
+    "precache-manifest.3566f768a9ace010c2991edd1df922ab.js": "/nepottysm-app/precache-manifest.3566f768a9ace010c2991edd1df922ab.js",
     "service-worker.js": "/nepottysm-app/service-worker.js",
-    "static/css/main.ecb8a10e.chunk.css.map": "/nepottysm-app/static/css/main.ecb8a10e.chunk.css.map",
+    "static/css/main.32e5179f.chunk.css.map": "/nepottysm-app/static/css/main.32e5179f.chunk.css.map",
     "static/js/2.9112ffe7.chunk.js.LICENSE.txt": "/nepottysm-app/static/js/2.9112ffe7.chunk.js.LICENSE.txt",
     "static/media/noun_poop.svg": "/nepottysm-app/static/media/noun_poop.653133f4.svg"
   },
   "entrypoints": [
     "static/js/runtime-main.a7274046.js",
     "static/js/2.9112ffe7.chunk.js",
-    "static/css/main.ecb8a10e.chunk.css",
-    "static/js/main.98ae4594.chunk.js"
+    "static/css/main.32e5179f.chunk.css",
+    "static/js/main.f8dd1c84.chunk.js"
   ]
 }
