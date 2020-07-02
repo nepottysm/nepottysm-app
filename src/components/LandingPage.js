@@ -10,36 +10,31 @@ class LandingPage extends React.Component {
       result: [],
       filteredMovies: [],
       selectedMovies: [],
+      step1: true,
+      step2: false,
+      step3: false,
+      nepoScore: 0,
     };
   }
 
-  // onLoad = () => {
-  //   const myHeaders = new Headers();
-  //   myHeaders.append(
-  //     'Cookie',
-  //     '__cfduid=d8b427a25fd3615dd62768b0e1dd8d4ca1593616030',
-  //   );
-  //   const requestOptions = {
-  //     method: 'GET',
-  //     headers: myHeaders,
-  //     redirect: 'follow',
-  //   };
+  moveToStep2 = () => {
+    const filteredMovies = data.filter(eachMovie => eachMovie.Year === 2020);
+    this.setState({
+      filteredMovies: filteredMovies.slice(0, 60),
+      selectedMovies: [],
+      step1: false,
+      step2: true,
+      step3: false,
+    });
+  };
 
-  //   const temp = IdArray.map((eachId) => {
-  //     fetch(
-  //       `http://www.omdbapi.com/?apikey=3d9886e5&type=movie&i=${eachId}`,
-  //       requestOptions,
-  //     )
-  //       .then(response => response.text())
-  //       .then((res) => {
-  //         const arr = [...this.state.result];
-  //         arr.push(res);
-  //         this.setState({ result: arr });
-  //         console.log(arr);
-  //       })
-  //       .catch(error => console.log('error', error));
-  //   });
-  // };
+  moveToStep1 = () => {
+    this.setState({
+      step1: true,
+      step2: false,
+      step3: false,
+    });
+  };
 
   loadMovies = (e) => {
     const filteredMovies = data.filter(
@@ -75,8 +70,12 @@ class LandingPage extends React.Component {
       score.push(eachScore);
       total += parseInt(eachScore, 10);
     });
-    debugger;
-    return total / score.length;
+    this.setState({
+      nepoScore: parseInt(total / score.length),
+      step1: false,
+      step2: false,
+      step3: true,
+    });
   };
 
   isNepoActor = (actorName) => {
@@ -118,52 +117,66 @@ class LandingPage extends React.Component {
   };
 
   render() {
-    const { filteredMovies } = this.state;
+    const {
+ filteredMovies, step1, step2, step3, nepoScore 
+} = this.state;
     return (
       <div>
-        <p>How you soar on our nepottysm meter ?</p>
-        <div className="pure-u-1">
-          <button
-            type="button"
-            className="pure-button button-primary"
-            onClick={this.getNepoScore}
-          >
-            Find Out
-          </button>
-        </div>
-        <p>
-          <span>Select the movies you watched in year</span>
-          <select
-            onChange={this.loadMovies}
-            className="pure-button button-primary dropdown"
-          >
-            <option>2020</option>
-            <option>2019</option>
-            <option>2018</option>
-            <option>2017</option>
-            <option>2016</option>
-          </select>
-        </p>
-        <div className="pure-g">
-          <div className="pure-u-1-24" />
-          <div className="pure-u-11-12">
-            {filteredMovies.length > 0
-              && filteredMovies.map(eachMovie => (
-                <div className="pure-u-1-2 pure-u-sm-1-3 pure-u-md-1-4 pure-u-lg-1-6">
-                  <label className="card" htmlFor={eachMovie.imdbID}>
-                    <input
-                      className="checkbox"
-                      type="checkbox"
-                      id={eachMovie.imdbID}
-                      onChange={this.onCheckboxChange}
-                    />
-                    <img className="thumbnail" src={eachMovie.Poster} />
-                    <div>
-                      <h4 className="movieTitle">{eachMovie.Title}</h4>
-                      <p className="line-clamp" title={eachMovie.Plot}>
-                        {eachMovie.Plot}
-                      </p>
-                      {/* <p>
+        {step1 && (
+          <>
+            <div className="pure-u-1-12" />
+            <div className="pure-u-5-6">
+              <p style={{ marginTop: '50px' }}>
+                How you soar on our nepottysm meter ?
+              </p>
+              <div className="pure-u-1">
+                <button
+                  type="button"
+                  className="pure-button button-primary"
+                  onClick={this.moveToStep2}
+                >
+                  Find Out
+                </button>
+              </div>
+            </div>
+            <div className="pure-u-1-12" />
+          </>
+        )}
+        {step2 && (
+          <>
+            <p>
+              <span>Select the movies you watched in year</span>
+              <select
+                onChange={this.loadMovies}
+                className="pure-button button-primary dropdown"
+              >
+                <option selected>2020</option>
+                <option>2019</option>
+                <option>2018</option>
+                <option>2017</option>
+                <option>2016</option>
+              </select>
+            </p>
+            <div className="pure-g">
+              <div className="pure-u-1-24" />
+              <div className="pure-u-11-12">
+                {filteredMovies.length > 0
+                  && filteredMovies.map(eachMovie => (
+                    <div className="pure-u-1-2 pure-u-sm-1-3 pure-u-md-1-4 pure-u-lg-1-6">
+                      <label className="card" htmlFor={eachMovie.imdbID}>
+                        <input
+                          className="checkbox"
+                          type="checkbox"
+                          id={eachMovie.imdbID}
+                          onChange={this.onCheckboxChange}
+                        />
+                        <img className="thumbnail" src={eachMovie.Poster} />
+                        <div>
+                          <h4 className="movieTitle">{eachMovie.Title}</h4>
+                          <p className="line-clamp" title={eachMovie.Plot}>
+                            {eachMovie.Plot}
+                          </p>
+                          {/* <p>
                         <span>Director:</span>
                         {eachMovie.Director}
                       </p>
@@ -175,13 +188,61 @@ class LandingPage extends React.Component {
                         <span>Actors:</span>
                         {eachMovie.Actors}
                       </p> */}
+                        </div>
+                      </label>
                     </div>
-                  </label>
-                </div>
-              ))}
-          </div>
-          <div className="pure-u-1-24" />
-        </div>
+                  ))}
+              </div>
+              <div className="pure-u-1-24" />
+            </div>
+            <div style={{ paddingBottom: '40px' }}>
+              <button
+                type="button"
+                className="pure-button button-primary sticky-button-bottom"
+                onClick={this.getNepoScore}
+              >
+                Get score
+              </button>
+            </div>
+          </>
+        )}
+        {step3 && (
+          <>
+            <div className="pure-u-1-12" />
+            <div className="pure-u-5-6">
+              <p style={{ marginTop: '50px' }}>
+                Your score is
+{" "}
+                <span className="nepo-score-badge">{nepoScore}</span>
+              </p>
+              {nepoScore >= 75 && (
+                <p>
+                  You have an excellent taste in movies, you should review
+                  movies for us
+                </p>
+              )}
+              {nepoScore < 75 && nepoScore >= 50 && (
+                <p>Check critic reviews before going for movies</p>
+              )}
+              {nepoScore < 50 && (
+                <p>
+                  Going for a coin toss is better than asking you for a movie
+                  suggestion
+                </p>
+              )}
+            </div>
+            <div className="pure-u-1-12" />
+            <div className="pure-u-1">
+              <button
+                type="button"
+                className="pure-button button-primary"
+                onClick={this.moveToStep1}
+              >
+                Start again ?
+              </button>
+            </div>
+          </>
+        )}
         {/* <div /> */}
         {/* <button type="button" onClick={this.onLoad}>
           Load data
