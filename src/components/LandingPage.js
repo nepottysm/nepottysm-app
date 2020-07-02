@@ -1,8 +1,8 @@
-import React from 'react';
-import { bigIntLiteral } from '@babel/types';
-import { data, nepoActors } from '../movieData';
+import React from "react";
+import { bigIntLiteral } from "@babel/types";
+import { data, nepoActors } from "../movieData";
 
-const IdArray = ['tt10888594'];
+const IdArray = ["tt10888594"];
 class LandingPage extends React.Component {
   constructor(props) {
     super(props);
@@ -13,7 +13,7 @@ class LandingPage extends React.Component {
       step1: true,
       step2: false,
       step3: false,
-      nepoScore: 0,
+      nepoScore: 0
     };
   }
 
@@ -24,7 +24,7 @@ class LandingPage extends React.Component {
       selectedMovies: [],
       step1: false,
       step2: true,
-      step3: false,
+      step3: false
     });
   };
 
@@ -32,27 +32,26 @@ class LandingPage extends React.Component {
     this.setState({
       step1: true,
       step2: false,
-      step3: false,
+      step3: false
     });
   };
 
-  loadMovies = (e) => {
+  loadMovies = e => {
     const filteredMovies = data.filter(
-      eachMovie => eachMovie.Year == e.currentTarget.value,
+      eachMovie => eachMovie.Year == e.currentTarget.value
     );
     this.setState({
       filteredMovies: filteredMovies.slice(0, 60),
-      selectedMovies: [],
+      selectedMovies: []
     });
   };
 
-  onCheckboxChange = (e) => {
+  onCheckboxChange = e => {
     console.log(e);
     const { selectedMovies } = this.state;
     if (e.currentTarget.checked) {
       selectedMovies.push(e.currentTarget.id);
-    }
- else {
+    } else {
       const index = selectedMovies.indexOf(e.currentTarget.id);
       if (index > -1) {
         selectedMovies.splice(index, 1);
@@ -63,9 +62,12 @@ class LandingPage extends React.Component {
 
   getNepoScore = () => {
     const { selectedMovies } = this.state;
+    if (selectedMovies.length === 0) {
+      return false;
+    }
     const score = [];
     let total = 0;
-    selectedMovies.map((eachMovieId) => {
+    selectedMovies.map(eachMovieId => {
       const eachScore = this.getScore(eachMovieId);
       score.push(eachScore);
       total += parseInt(eachScore, 10);
@@ -74,11 +76,11 @@ class LandingPage extends React.Component {
       nepoScore: parseInt(total / score.length),
       step1: false,
       step2: false,
-      step3: true,
+      step3: true
     });
   };
 
-  isNepoActor = (actorName) => {
+  isNepoActor = actorName => {
     let found = false;
     for (let i = 0; i < nepoActors.length; i++) {
       if (nepoActors[i].toLowerCase().trim() === actorName.toLowerCase()) {
@@ -89,7 +91,7 @@ class LandingPage extends React.Component {
     return found;
   };
 
-  getScore = (movieId) => {
+  getScore = movieId => {
     const { filteredMovies } = this.state;
     let imdbScore = 10;
     let actorsScore = 10;
@@ -98,9 +100,9 @@ class LandingPage extends React.Component {
       if (filteredMovies[i].imdbID === movieId) {
         movieObj = filteredMovies[i];
 
-        const actorsArr = movieObj.Actors.split(',');
-        const productionsArr = movieObj.Production.split(',');
-        const directorsArr = movieObj.Director.split(',');
+        const actorsArr = movieObj.Actors.split(",");
+        const productionsArr = movieObj.Production.split(",");
+        const directorsArr = movieObj.Director.split(",");
         let nepoActorsCount = 0;
         for (let j = 0; j < actorsArr.length; j++) {
           if (this.isNepoActor(actorsArr[j].trim())) {
@@ -117,17 +119,15 @@ class LandingPage extends React.Component {
   };
 
   render() {
-    const {
- filteredMovies, step1, step2, step3, nepoScore 
-} = this.state;
+    const { filteredMovies, step1, step2, step3, nepoScore } = this.state;
     return (
       <div>
         {step1 && (
           <>
             <div className="pure-u-1-12" />
             <div className="pure-u-5-6">
-              <p style={{ marginTop: '50px' }}>
-                How you soar on our nepottysm meter ?
+              <p style={{ marginTop: "50px" }}>
+                How you fare on our nepottysm meter ?
               </p>
               <div className="pure-u-1">
                 <button
@@ -160,8 +160,8 @@ class LandingPage extends React.Component {
             <div className="pure-g">
               <div className="pure-u-1-24" />
               <div className="pure-u-11-12">
-                {filteredMovies.length > 0
-                  && filteredMovies.map(eachMovie => (
+                {filteredMovies.length > 0 &&
+                  filteredMovies.map(eachMovie => (
                     <div className="pure-u-1-2 pure-u-sm-1-3 pure-u-md-1-4 pure-u-lg-1-6">
                       <label className="card" htmlFor={eachMovie.imdbID}>
                         <input
@@ -195,7 +195,7 @@ class LandingPage extends React.Component {
               </div>
               <div className="pure-u-1-24" />
             </div>
-            <div style={{ paddingBottom: '40px' }}>
+            <div style={{ paddingBottom: "40px" }}>
               <button
                 type="button"
                 className="pure-button button-primary sticky-button-bottom"
@@ -210,9 +210,8 @@ class LandingPage extends React.Component {
           <>
             <div className="pure-u-1-12" />
             <div className="pure-u-5-6">
-              <p style={{ marginTop: '50px' }}>
-                Your score is
-{" "}
+              <p style={{ marginTop: "50px" }}>
+                Your score is{" "}
                 <span className="nepo-score-badge">{nepoScore}</span>
               </p>
               {nepoScore >= 75 && (
