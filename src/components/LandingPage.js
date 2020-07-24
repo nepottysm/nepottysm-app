@@ -127,7 +127,7 @@ class LandingPage extends React.Component {
             <div className="pure-u-1-12" />
             <div className="pure-u-5-6">
               <p style={{ marginTop: "50px" }}>
-                How you fare on our nepottysm meter ?
+                How you fare on our nepottysm meter ? MAVERICK GAMING
               </p>
               <div className="pure-u-1">
                 <button
